@@ -2,13 +2,19 @@ import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser, login } from '../../store/auth-effect';
 import classes from './AuthForm.module.css';
+import { useHistory } from 'react-router-dom';
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const dispatch = useDispatch();
+  const history = useHistory();
   const authState = useSelector(state => state.auth);
+
+  if (authState.token) {
+    history.replace('/');
+  }
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);

@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 import classes from './MainNavigation.module.css';
 
 const MainNavigation = () => {
+  const authState = useSelector(state => state.auth);
+
   return (
     <header className={classes.header}>
       <Link to='/'>
@@ -10,15 +12,15 @@ const MainNavigation = () => {
       </Link>
       <nav>
         <ul>
-          <li>
+          {!authState.token && <li>
             <Link to='/auth'>Login</Link>
-          </li>
-          <li>
+          </li>}
+          {authState.token && <li>
             <Link to='/profile'>Profile</Link>
-          </li>
-          <li>
+          </li>}
+          {authState.token && <li>
             <button>Logout</button>
-          </li>
+          </li>}
         </ul>
       </nav>
     </header>
