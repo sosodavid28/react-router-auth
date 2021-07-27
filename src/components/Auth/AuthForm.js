@@ -9,7 +9,6 @@ const AuthForm = () => {
   const passwordInputRef = useRef();
   const dispatch = useDispatch();
   const authState = useSelector(state => state.auth);
-  console.log(authState);
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);

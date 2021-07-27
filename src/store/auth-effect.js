@@ -7,11 +7,9 @@ export const createUser = (email, password) => {
 
     try {
       const response = await authApiService.createUser(email, password);
-      console.log('response', response)
       dispatch(authReducerActions.createUserSuccess(response.data.idToken));
-
     } catch (error) {
-
+      dispatch(authError(error.response.data.error));
     }
 
     dispatch(authReducerActions.authFinished());
@@ -24,13 +22,17 @@ export const login = (email, password) => {
 
     try {
       const response = await authApiService.login(email, password);
-      console.log('response', response)
       dispatch(authReducerActions.loginSuccess(response.data.idToken));
-
     } catch (error) {
-
+      dispatch(authError(error.response.data.error));
     }
 
     dispatch(authReducerActions.authFinished());
+  }
+}
+
+export const authError = (error) => {
+  return () => {
+    alert(error.message);
   }
 }
