@@ -8,6 +8,7 @@ export const createUser = (email, password) => {
     try {
       const response = await authApiService.createUser(email, password);
       dispatch(authReducerActions.createUserSuccess(response.data.idToken));
+      localStorage.setItem('token', response.data.idToken);
     } catch (error) {
       dispatch(authError(error.response.data.error));
     }
@@ -23,11 +24,19 @@ export const login = (email, password) => {
     try {
       const response = await authApiService.login(email, password);
       dispatch(authReducerActions.loginSuccess(response.data.idToken));
+      localStorage.setItem('token', response.data.idToken);
     } catch (error) {
       dispatch(authError(error.response.data.error));
     }
 
     dispatch(authReducerActions.authFinished());
+  }
+}
+
+export const logout = () => {
+  return (dispatch) => {
+    dispatch(authReducerActions.logout());
+    localStorage.removeItem('token');
   }
 }
 

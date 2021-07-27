@@ -28,7 +28,7 @@ const authReducer = createSlice({
       state.token = '';
     },
     setTokenFromLocalStorage(state, action) {
-
+      state.token = action.payload;
     },
     clearExpireToken(state, action) {
 

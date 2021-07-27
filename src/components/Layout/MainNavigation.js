@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { authReducerActions } from '../../store/auth-reducer';
+import { logout } from '../../store/auth-effect';
 import classes from './MainNavigation.module.css';
 
 const MainNavigation = () => {
   const authState = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const logoutHandler = () => {
-    dispatch(authReducerActions.logout());
+    dispatch(logout());
   }
 
   return (

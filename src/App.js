@@ -4,9 +4,16 @@ import Layout from './components/Layout/Layout';
 import UserProfile from './components/Profile/UserProfile';
 import AuthPage from './pages/AuthPage';
 import HomePage from './pages/HomePage';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { authReducerActions } from './store/auth-reducer';
 
 function App() {
+  const token = localStorage.getItem('token');
+  const dispatch = useDispatch();
+
+  if (token) {
+    dispatch(authReducerActions.setTokenFromLocalStorage(token));
+  }
   const authState = useSelector(state => state.auth);
 
   return (
